@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  margin: 0;
+    border-bottom: 2px solid #1A60C0; /* Добавляем линию */
+  padding: 15px 0 15px 0; /* Отступ снизу */
+}
+
+h1 {
+  font-size: 36px;
+  margin: 0;
+  color: #1A60C0;
+}
+
+ul {
+  display: flex;
+  font-size: 20px;
+  gap: 5rem;
+  list-style-type: none;
+  padding: 0;
+}
+
+ul a {
+  text-decoration: none;
+  color: black;
+}
+
+.logo {
+  width: 40px;
+}
