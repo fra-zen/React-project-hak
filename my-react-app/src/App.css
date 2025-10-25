@@ -1,46 +1,64 @@
+/* Базовые сбросы и настройки */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   display: flex;
+  flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
-}
-h1 {
-  font-size: 36px;
-  margin: 0;
-  color: #1a60c0;
-}
-h2 {
-  margin: 0 auto;
-  padding: 5px 10px;
-}
-h3 {
-  font-size: 48px;
-}
-p {
-  font-size: 20px;
+  font-family: Arial, sans-serif;
 }
 
+/* Хедер */
 header {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   margin: 0;
   padding: 15px 0;
-  position: sticky;
+  position: relative;
   background-color: white;
-  margin-bottom: 2%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* Линия через псевдоэлемент */
 header::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #1a60c0;
+  background-color: #1A60C0;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 36px;
+  margin: 0;
+  color: #1A60C0;
+}
+
+h2 {
+  margin: 0 auto;
+  padding: 5px 10px;
+  font-size: 2rem;
+}
+
+h3 {
+  margin: 0 auto;
+  line-height: 1.5;
+  font-size: 48px;
+}
+
+p {
+  line-height: 2;
+  font-size: 20px;
 }
 
 ul {
@@ -52,75 +70,79 @@ ul {
   margin: 0;
 }
 
-ul li {
-  position: relative;
-}
-
 ul a {
   text-decoration: none;
   color: black;
+  position: relative;
   padding: 10px 5px;
   display: block;
-  transition: all 0.3s ease;
-  transform-origin: center;
 }
 
-/* Активное состояние ссылки */
 ul a.active {
-  color: #2b2b2b;
-  transform: scale(1.2);
+  color: #1A60C0;
+  font-weight: bold;
 }
 
-/* Псевдоэлемент на li, который перекрывает синюю линию */
-ul li::after {
-  content: "";
+ul a.active::after {
+  content: '';
   position: absolute;
   bottom: -16px;
-  left: 50%;
-  width: 0;
+  left: -18px;
+  right: -18px;
   height: 18px;
   background-color: white;
   z-index: 2;
-  transform: translateX(-50%);
-  transition: width 0.3s ease;
-}
-
-/* При активном состоянии расширяем */
-ul li.active::after {
-  width: calc(100% + 10px);
 }
 
 .logo {
   width: 40px;
+  height: auto;
 }
+
+/* Основные секции */
+.hero {
+  margin-top: 20px;
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Первый экран */
 .hero-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  position: relative;
+  margin-bottom: 4rem;
 }
 
 .hero-content-message {
-  position: relative;
-  left: 170px;
-  padding: 0;
+  padding: 20px 40px;
   color: #ffffff;
   background-color: #ff0000;
   border-radius: 45px;
   border-bottom-left-radius: 0;
 }
-.main-img {
-  max-width: 25%;
-  height: auto;
-}
+
 .hero-first-screen {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4rem 0;
+  gap: 2rem;
+}
+
+.main-img {
+  max-width: 40%;
+  height: auto;
 }
 
 .hero-first-screen-text {
-  max-width: 30%;
+  text-align: right;
+  max-width: 40%;
 }
 
 .blue-text {
@@ -130,68 +152,72 @@ ul li.active::after {
 .red-text {
   color: #ff0000; 
 }
-.hero {
-  position: relative;
-}
 
+/* Второй экран */
 .hero-second-screen {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5%;
-  min-height: 400px;
-  margin: 50px 0;
+  margin: 4rem 0;
+  gap: 2rem;
 }
 
-.hero-second-screen p {
-  max-width: 25%;
-}
-
-.hero-second-screen-dop {
-  max-width: 25%;
-}
-
-.hero-second-screen-dop p {
-  max-width: 100%;
+.hero-second-screen-text {
+  text-align: left;
+  max-width: 40%;
 }
 
 .second-img {
-  max-width: 100%;
-}
-
-.third-img {
-  max-width: 25%;
+  max-width: 40%;
   height: auto;
 }
 
-/* Новый раздел с кубом */
+/* Третий экран */
 .hero-third-screen {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  min-height: 400px;
-  margin: 50px 0;
-  padding: 0 5%;
+  margin: 4rem 0;
+  gap: 2rem;
+}
+
+.hero-third-screen-text {
+  text-align: right;
+  max-width: 40%;
+}
+
+.third-img {
+  max-width: 40%;
+  height: auto;
+}
+
+/* Четвертый экран с кубом */
+.hero-fourth-screen {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4rem 0;
+  gap: 2rem;
 }
 
 .cube-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 25%;
+  width: 40%;
 }
 
-.hero-third-screen-text {
+.hero-fourth-screen-text {
   max-width: 40%;
   text-align: center;
 }
 
-.hero-third-screen-text h3 {
+.hero-fourth-screen-text h3 {
   font-size: 36px;
   margin-bottom: 20px;
 }
 
-.hero-third-screen-text p {
+.hero-fourth-screen-text p {
   font-size: 18px;
   line-height: 1.6;
 }
@@ -271,31 +297,17 @@ ul li.active::after {
               0 0 40px hsl(176.61, 42.28%, 40.7%) 19.6%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Секция скачивания */
 .download-section {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 300px;
-
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   text-align: center;
   padding: 50px 0;
+  margin: 4rem 0;
 }
 
 .download-content h3 {
@@ -309,7 +321,6 @@ ul li.active::after {
   max-width: 500px;
 }
 
-/* Стили для кнопки */
 .btn {
   width: 6.5em;
   height: 2.3em;
@@ -345,6 +356,223 @@ ul li.active::after {
 
 .btn:hover:after {
   transform: skewX(-45deg) scale(1, 1);
-  -webkit-transition: all 0.5s;
   transition: all 0.5s;
+}
+
+/* Секция "О нас" */
+.about-section {
+  padding: 4rem 0;
+  background: #ffffff;
+}
+
+.about-content {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.about-text {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 50%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/* Бегущая строка изображений */
+.scrolling-gallery {
+  overflow: hidden;
+  margin: 3rem 0;
+  position: relative;
+}
+
+.scrolling-track {
+  display: flex;
+  animation: scrollHorizontal 60s linear infinite;
+  gap: 75px;
+}
+
+.scrolling-item {
+  flex: 0 0 450px;
+  height: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  filter: drop-shadow(0 8px 25px rgba(0,0,0,0.15));
+}
+
+.scrolling-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes scrollHorizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-450px * 8 - 75px * 8));
+  }
+}
+
+/* Футер */
+.footer {
+  background-color: #1960C1;
+  padding: 40px 0;
+  margin-top: 60px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.contacts-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  color: #ffffff;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: #a0d0ff;
+}
+
+.description-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-description {
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+}
+
+.links-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.footer-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #a0d0ff;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 10px 0;
+  }
+
+  ul {
+    gap: 2rem;
+    font-size: 16px;
+  }
+
+  .hero-first-screen,
+  .hero-second-screen,
+  .hero-third-screen,
+  .hero-fourth-screen {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .hero-first-screen-text,
+  .hero-second-screen-text,
+  .hero-third-screen-text,
+  .hero-fourth-screen-text,
+  .main-img,
+  .second-img,
+  .third-img {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .about-text {
+    max-width: 90%;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .links-section {
+    align-items: center;
+  }
+
+  .scrolling-item {
+    flex: 0 0 300px;
+    height: 200px;
+  }
+
+  h3 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  h3 {
+    font-size: 28px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .scrolling-track {
+    gap: 40px;
+  }
+
+  .scrolling-item {
+    flex: 0 0 250px;
+    height: 150px;
+  }
 }
