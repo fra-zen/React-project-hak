@@ -32,15 +32,7 @@ function App() {
                 О нас
               </a>
             </li>
-            <li>
-              <a 
-                href="#contacts" 
-                className={activeLink === 'contacts' ? 'active' : ''}
-                onClick={() => handleLinkClick('contacts')}
-              >
-                Контакты
-              </a>
-            </li>
+            
             <li>
               <a 
                 href="#download" 
@@ -50,6 +42,15 @@ function App() {
                 Скачать
               </a>
             </li>
+            <li>
+              <a 
+                href="#contacts" 
+                className={activeLink === 'contacts' ? 'active' : ''}
+                onClick={() => handleLinkClick('contacts')}
+              >
+                Контакты
+              </a>
+            </li>
           </ul>
         </nav>
         <img className="logo" src="/rndlogo13.png" alt="Логотип" />
@@ -57,11 +58,6 @@ function App() {
 
       <section className="hero">
         <div className="container">
-          <div className="hero-content">
-            <div className="hero-content-message">
-              <h2>Добро пожаловать на ЮГ</h2>
-            </div>
-          </div>
           
           <div className="hero-first-screen">
             <img className="main-img" src="./Group 146.png" alt="Главное изображение" />
@@ -156,8 +152,8 @@ function App() {
               <h3 className="footer-title">Контакты:</h3>
               <div className="contact-links">
                 <a href="mailto:formali@mail.com" className="contact-link">formali@mail.com</a>
-                <a href="tel:+79999999999" className="contact-link">+7 (999) 999-99-99</a>
-                <a href="https://vk.com/dontour" className="contact-link">vk.com/dontour</a>
+
+                <a href="https://vk.com/vomatix" className="contact-link">vk.com/vomatix</a>
               </div>
             </div>
 

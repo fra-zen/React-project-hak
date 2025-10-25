@@ -106,9 +106,8 @@ ul a.active::after {
 }
 
 .container {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
 }
 
 /* Первый экран */
@@ -119,24 +118,17 @@ ul a.active::after {
   margin-bottom: 4rem;
 }
 
-.hero-content-message {
-  padding: 20px 40px;
-  color: #ffffff;
-  background-color: #ff0000;
-  border-radius: 45px;
-  border-bottom-left-radius: 0;
-}
 
 .hero-first-screen {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 4rem 0;
-  gap: 2rem;
+display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem 0;
+    gap: 5%;
 }
 
 .main-img {
-  max-width: 40%;
+  max-width: 30%;
   height: auto;
 }
 
@@ -156,10 +148,10 @@ ul a.active::after {
 /* Второй экран */
 .hero-second-screen {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin: 4rem 0;
-  gap: 2rem;
+  gap: 5%;
 }
 
 .hero-second-screen-text {
@@ -168,17 +160,18 @@ ul a.active::after {
 }
 
 .second-img {
-  max-width: 40%;
+  max-width: 30%;
   height: auto;
 }
 
 /* Третий экран */
 .hero-third-screen {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 4rem 0;
-  gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4rem 0;
+    gap: 2rem;
+    width: 87.5%;
 }
 
 .hero-third-screen-text {
@@ -187,17 +180,17 @@ ul a.active::after {
 }
 
 .third-img {
-  max-width: 40%;
+  max-width: 30%;
   height: auto;
 }
 
 /* Четвертый экран с кубом */
 .hero-fourth-screen {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 4rem 0;
-  gap: 2rem;
+display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 4rem;
+    flex-direction: column;
 }
 
 .cube-container {
@@ -210,6 +203,7 @@ ul a.active::after {
 .hero-fourth-screen-text {
   max-width: 40%;
   text-align: center;
+  padding-top: 4%;
 }
 
 .hero-fourth-screen-text h3 {
