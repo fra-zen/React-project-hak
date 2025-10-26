@@ -315,7 +315,6 @@ function App() {
             </div>
 
             <div className="links-section">
-              <a href="#" className="footer-link">Доступно в RuStore</a>
               <a href="#" className="footer-link">Политика конфиденциальности</a>
               <a href="#" className="footer-link">Пользовательское соглашение</a>
             </div>
