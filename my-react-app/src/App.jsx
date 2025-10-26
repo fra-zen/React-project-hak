@@ -305,7 +305,7 @@ function App() {
             <div className="contacts-section">
               <h3 className="footer-title">Контакты:</h3>
               <div className="contact-links">
-                <a href="mailto:vomatixincorporated@gmail.com" className="contact-link">mailto:vomatixincorporated@gmail.com</a>
+                <a href="mailto:vomatixincorporated@gmail.com" className="contact-link">vomatixincorporated@gmail.com</a>
                 <a href="https://vk.com/vomatix" className="contact-link">vk.com/vomatix</a>
               </div>
             </div>
