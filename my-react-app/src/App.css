@@ -102,7 +102,7 @@ ul a.active::after {
 /* Основные секции */
 .hero {
   margin-top: 20px;
-  padding: 2rem 0;
+
 }
 
 .container {
@@ -297,11 +297,8 @@ display: flex;
   justify-content: center;
   align-items: center;
   min-height: 300px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  color: rgb(0, 0, 0);
   text-align: center;
-  padding: 50px 0;
-  margin: 4rem 0;
 }
 
 .download-content h3 {
@@ -421,13 +418,13 @@ display: flex;
 }
 
 .footer-container {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 40px;
-  align-items: start;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
+    gap: 40px;
+    align-items: center;
+    justify-items: center;
 }
 
 .contacts-section {
@@ -569,4 +566,120 @@ display: flex;
     flex: 0 0 250px;
     height: 150px;
   }
+}
+
+
+/* Анимации плавного появления */
+.hero-first-screen,
+.hero-second-screen,
+.hero-third-screen,
+.hero-fourth-screen,
+.about-section,
+.download-section,
+.footer {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.hero-first-screen.visible,
+.hero-second-screen.visible,
+.hero-third-screen.visible,
+.hero-fourth-screen.visible,
+.about-section.visible,
+.download-section.visible,
+.footer.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Задержки для последовательного появления */
+.hero-first-screen { transition-delay: 0.1s; }
+.hero-second-screen { transition-delay: 0.2s; }
+.hero-third-screen { transition-delay: 0.3s; }
+.hero-fourth-screen { transition-delay: 0.4s; }
+.about-section { transition-delay: 0.5s; }
+.download-section { transition-delay: 0.6s; }
+.footer { transition-delay: 0.7s; }
+
+/* Плавная прокрутка для всей страницы */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Дополнительные стили для активных ссылок */
+ul a.active {
+  position: relative;
+}
+
+ul a.active::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #1A60C0;
+  transform: scaleX(1);
+  transition: transform 0.3s ease;
+}
+
+/* Анимации плавного появления */
+.hero-first-screen,
+.hero-second-screen,
+.hero-third-screen,
+.hero-fourth-screen,
+.about-section,
+.download-section,
+.footer {
+  opacity: 1; /* Сначала видим все элементы */
+  transform: translateY(0);
+}
+
+/* Если хотите анимацию при загрузке, используйте это: */
+/* 
+.hero-first-screen,
+.hero-second-screen, 
+.hero-third-screen,
+.hero-fourth-screen,
+.about-section,
+.download-section,
+.footer {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.hero-first-screen.visible,
+.hero-second-screen.visible,
+.hero-third-screen.visible,
+.hero-fourth-screen.visible, 
+.about-section.visible,
+.download-section.visible,
+.footer.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+*/
+
+/* Плавная прокрутка */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Стили для активных ссылок навигации */
+ul a.active {
+  color: #1A60C0;
+  font-weight: bold;
+  position: relative;
+}
+
+ul a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #1A60C0;
 }

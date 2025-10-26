@@ -1,12 +1,84 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 
 function App() {
   const [activeLink, setActiveLink] = useState('about')
+  const [visibleSections, setVisibleSections] = useState([])
 
-  const handleLinkClick = (link) => {
+  // Refs для секций навигации
+  const aboutRef = useRef(null)
+  const teamRef = useRef(null)
+  const downloadRef = useRef(null)
+  const contactsRef = useRef(null)
+
+  const handleLinkClick = (link, event) => {
+    event.preventDefault()
     setActiveLink(link)
+    
+    // Прокрутка к соответствующей секции
+    switch(link) {
+      case 'about':
+        aboutRef.current?.scrollIntoView({ behavior: 'smooth' })
+        break
+      case 'team':
+        teamRef.current?.scrollIntoView({ behavior: 'smooth' })
+        break
+      case 'download':
+        downloadRef.current?.scrollIntoView({ behavior: 'smooth' })
+        break
+      case 'contacts':
+        contactsRef.current?.scrollIntoView({ behavior: 'smooth' })
+        break
+      default:
+        break
+    }
   }
+
+  // Анимация появления блоков при скролле
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleSections(prev => [...prev, entry.target.className])
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    )
+
+    // Наблюдаем за всеми секциями
+    const sections = [
+      '.hero-first-screen',
+      '.hero-second-screen', 
+      '.hero-third-screen',
+      '.hero-fourth-screen',
+      '.about-section',
+      '.download-section',
+      '.footer'
+    ]
+
+    sections.forEach(selector => {
+      const element = document.querySelector(selector)
+      if (element) {
+        observer.observe(element)
+      }
+    })
+
+    return () => {
+      sections.forEach(selector => {
+        const element = document.querySelector(selector)
+        if (element) {
+          observer.unobserve(element)
+        }
+      })
+    }
+  }, [])
+
+  const isVisible = (sectionClass) => visibleSections.includes(sectionClass)
 
   return (
     <>
@@ -18,7 +90,7 @@ function App() {
               <a 
                 href="#about" 
                 className={activeLink === 'about' ? 'active' : ''}
-                onClick={() => handleLinkClick('about')}
+                onClick={(e) => handleLinkClick('about', e)}
               >
                 О приложении
               </a>
@@ -27,17 +99,16 @@ function App() {
               <a 
                 href="#team" 
                 className={activeLink === 'team' ? 'active' : ''}
-                onClick={() => handleLinkClick('team')}
+                onClick={(e) => handleLinkClick('team', e)}
               >
                 О нас
               </a>
             </li>
-            
             <li>
               <a 
                 href="#download" 
                 className={activeLink === 'download' ? 'active' : ''}
-                onClick={() => handleLinkClick('download')}
+                onClick={(e) => handleLinkClick('download', e)}
               >
                 Скачать
               </a>
@@ -46,7 +117,7 @@ function App() {
               <a 
                 href="#contacts" 
                 className={activeLink === 'contacts' ? 'active' : ''}
-                onClick={() => handleLinkClick('contacts')}
+                onClick={(e) => handleLinkClick('contacts', e)}
               >
                 Контакты
               </a>
@@ -58,8 +129,11 @@ function App() {
 
       <section className="hero">
         <div className="container">
-          
-          <div className="hero-first-screen">
+          {/* Hero First Screen - О приложении */}
+          <div 
+            ref={aboutRef}
+            className={`hero-first-screen ${isVisible('hero-first-screen') ? 'visible' : ''}`}
+          >
             <img className="main-img" src="./Group 146.png" alt="Главное изображение" />
             <div className="hero-first-screen-text">
               <h3>
@@ -73,15 +147,17 @@ function App() {
             </div>
           </div>
 
-          <div className="hero-second-screen">
+          {/* Hero Second Screen */}
+          <div className={`hero-second-screen ${isVisible('hero-second-screen') ? 'visible' : ''}`}>
             <div className="hero-second-screen-text">
               <h3>Путешествуйте в своём стиле</h3>
               <p>Ваш надежный попутчик, который объединяет все элементы путешествия — от мероприятий и отелей до транспорта — в ваш идеальный маршрут.</p>
             </div>
-            <img className="second-img" src="./Group 147.png" alt="Второе изображение" />
+            <img className="second-img" src="./Group 135.png" alt="Второе изображение" />
           </div>
 
-          <div className="hero-third-screen">
+          {/* Hero Third Screen */}
+          <div className={`hero-third-screen ${isVisible('hero-third-screen') ? 'visible' : ''}`}>
             <img className="third-img" src="./348391_original 1.png" alt="Третье изображение" />
             <div className="hero-third-screen-text">
               <h3>Ваш идеальный маршрут уже готов</h3>
@@ -89,7 +165,8 @@ function App() {
             </div>
           </div>
 
-          <div className="hero-fourth-screen">
+          {/* Hero Fourth Screen */}
+          <div className={`hero-fourth-screen ${isVisible('hero-fourth-screen') ? 'visible' : ''}`}>
             <div className="cube-container">
               <div className="cube-loader">
                 <div className="cube-top"></div>
@@ -109,7 +186,11 @@ function App() {
         </div>
       </section>
 
-      <section className="about-section">
+      {/* Секция "О нас" */}
+      <section 
+        ref={teamRef}
+        className={`about-section ${isVisible('about-section') ? 'visible' : ''}`}
+      >
         <div className="container">
           <div className="scrolling-gallery">
             <div className="scrolling-track">
@@ -135,24 +216,30 @@ function App() {
         </div>
       </section>
 
-      <section className="download-section">
+      {/* Секция "Скачать" */}
+      <section 
+        ref={downloadRef}
+        className={`download-section ${isVisible('download-section') ? 'visible' : ''}`}
+      >
         <div className="container">
           <div className="download-content">
             <h3>Скачайте приложение сейчас</h3>
-            <p>Начните свое путешествие по Ростовской области прямо сейчас</p>
             <button className="btn">Скачать</button>
           </div>
         </div>
       </section>
 
-      <footer className="footer">
+      {/* Футер "Контакты" */}
+      <footer 
+        ref={contactsRef}
+        className={`footer ${isVisible('footer') ? 'visible' : ''}`}
+      >
         <div className="container">
           <div className="footer-container">
             <div className="contacts-section">
               <h3 className="footer-title">Контакты:</h3>
               <div className="contact-links">
-                <a href="mailto:formali@mail.com" className="contact-link">formali@mail.com</a>
-
+                <a href="mailto:maxim@vomatix.ru" className="contact-link">maxim@vomatix.ru</a>
                 <a href="https://vk.com/vomatix" className="contact-link">vk.com/vomatix</a>
               </div>
             </div>
@@ -165,9 +252,8 @@ function App() {
 
             <div className="links-section">
               <a href="#" className="footer-link">Доступно в RuStore</a>
-              <a href="#" className="footer-link">Подписка PRO</a>
+              <a href="#" className="footer-link">Политика конфиденциальности</a>
               <a href="#" className="footer-link">Пользовательское соглашение</a>
-              <a href="#" className="footer-link">Сообщить об ошибке</a>
             </div>
           </div>
         </div>
