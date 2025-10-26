@@ -288,7 +288,9 @@ function App() {
         <div className="container">
           <div className="download-content">
             <h3>Скачайте приложение сейчас</h3>
+            <a href="https://disk.yandex.ru/d/nPplAfChpHPyfg" download>
             <button className="btn">Скачать</button>
+            </a>
           </div>
         </div>
       </section>
@@ -315,8 +317,8 @@ function App() {
             </div>
 
             <div className="links-section">
-              <a href="#" className="footer-link">Политика конфиденциальности</a>
-              <a href="#" className="footer-link">Пользовательское соглашение</a>
+              <a href="https://disk.yandex.ru/i/HjAUltSqHo17aw" className="footer-link">Политика конфиденциальности</a>
+              <a href="https://disk.yandex.ru/i/xuYDoE7owiDPlg" className="footer-link">Пользовательское соглашение</a>
             </div>
           </div>
         </div>
