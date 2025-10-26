@@ -4,6 +4,7 @@ import './App.css'
 function App() {
   const [activeLink, setActiveLink] = useState('about')
   const [visibleSections, setVisibleSections] = useState([])
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   // Refs для секций навигации
   const aboutRef = useRef(null)
@@ -14,6 +15,7 @@ function App() {
   const handleLinkClick = (link, event) => {
     event.preventDefault()
     setActiveLink(link)
+    setIsMenuOpen(false) // Закрываем меню при клике на ссылку
     
     // Прокрутка к соответствующей секции
     switch(link) {
@@ -32,6 +34,10 @@ function App() {
       default:
         break
     }
+  }
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
   }
 
   // Анимация появления блоков при скролле
@@ -84,7 +90,7 @@ function App() {
     <>
       <header>
         <h1>ДонTour</h1>
-        <nav>
+        <nav className="desktop-nav">
           <ul>
             <li>
               <a 
@@ -124,6 +130,64 @@ function App() {
             </li>
           </ul>
         </nav>
+
+        {/* Toggle меню для мобильных */}
+<div className="mobile-menu-container">
+  <div className={`toggle ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  
+  {/* Overlay для закрытия меню */}
+  <div 
+    className={`mobile-nav-overlay ${isMenuOpen ? 'open' : ''}`}
+    onClick={toggleMenu}
+  />
+  
+  {/* Мобильное меню */}
+  <div className={`mobile-nav ${isMenuOpen ? 'open' : ''}`}>
+    <ul>
+      <li>
+        <a 
+          href="#about" 
+          className={activeLink === 'about' ? 'active' : ''}
+          onClick={(e) => handleLinkClick('about', e)}
+        >
+          О приложении
+        </a>
+      </li>
+      <li>
+        <a 
+          href="#team" 
+          className={activeLink === 'team' ? 'active' : ''}
+          onClick={(e) => handleLinkClick('team', e)}
+        >
+          О нас
+        </a>
+      </li>
+      <li>
+        <a 
+          href="#download" 
+          className={activeLink === 'download' ? 'active' : ''}
+          onClick={(e) => handleLinkClick('download', e)}
+        >
+          Скачать
+        </a>
+      </li>
+      <li>
+        <a 
+          href="#contacts" 
+          className={activeLink === 'contacts' ? 'active' : ''}
+          onClick={(e) => handleLinkClick('contacts', e)}
+        >
+          Контакты
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
         <img className="logo" src="/rndlogo13.png" alt="Логотип" />
       </header>
 
@@ -160,7 +224,7 @@ function App() {
           <div className={`hero-third-screen ${isVisible('hero-third-screen') ? 'visible' : ''}`}>
             <img className="third-img" src="./348391_original 1.png" alt="Третье изображение" />
             <div className="hero-third-screen-text">
-              <h3>Ваш идеальный маршрут уже готов</h3>
+              <h3>Ваш лучший маршрут уже готов</h3>
               <p>Вам нужно только указать свои пожелания, а готовый план поездки появится автоматически.</p>
             </div>
           </div>
@@ -239,7 +303,7 @@ function App() {
             <div className="contacts-section">
               <h3 className="footer-title">Контакты:</h3>
               <div className="contact-links">
-                <a href="mailto:maxim@vomatix.ru" className="contact-link">maxim@vomatix.ru</a>
+                <a href="mailto:vomatixincorporated@gmail.com" className="contact-link">mailto:vomatixincorporated@gmail.com</a>
                 <a href="https://vk.com/vomatix" className="contact-link">vk.com/vomatix</a>
               </div>
             </div>

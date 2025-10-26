@@ -22,9 +22,11 @@ header {
   width: 100%;
   margin: 0;
   padding: 15px 0;
-  position: relative;
+  position: sticky;
+  top: 0;
   background-color: white;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
 
 header::after {
@@ -176,7 +178,7 @@ display: flex;
 
 .hero-third-screen-text {
   text-align: right;
-  max-width: 40%;
+  max-width: 60%;
 }
 
 .third-img {
@@ -201,7 +203,7 @@ display: flex;
 }
 
 .hero-fourth-screen-text {
-  max-width: 40%;
+  max-width: 90%;
   text-align: center;
   padding-top: 4%;
 }
@@ -488,85 +490,7 @@ display: flex;
   color: #a0d0ff;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 10px 0;
-  }
 
-  ul {
-    gap: 2rem;
-    font-size: 16px;
-  }
-
-  .hero-first-screen,
-  .hero-second-screen,
-  .hero-third-screen,
-  .hero-fourth-screen {
-    flex-direction: column;
-    text-align: center;
-    gap: 2rem;
-  }
-
-  .hero-first-screen-text,
-  .hero-second-screen-text,
-  .hero-third-screen-text,
-  .hero-fourth-screen-text,
-  .main-img,
-  .second-img,
-  .third-img {
-    max-width: 100%;
-    text-align: center;
-  }
-
-  .about-text {
-    max-width: 90%;
-  }
-
-  .footer-container {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    text-align: center;
-  }
-
-  .links-section {
-    align-items: center;
-  }
-
-  .scrolling-item {
-    flex: 0 0 300px;
-    height: 200px;
-  }
-
-  h3 {
-    font-size: 36px;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 28px;
-  }
-
-  h3 {
-    font-size: 28px;
-  }
-
-  p {
-    font-size: 16px;
-  }
-
-  .scrolling-track {
-    gap: 40px;
-  }
-
-  .scrolling-item {
-    flex: 0 0 250px;
-    height: 150px;
-  }
-}
 
 
 /* Анимации плавного появления */
@@ -682,4 +606,314 @@ ul a.active::after {
   width: 100%;
   height: 2px;
   background-color: #1A60C0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Toggle меню для мобильных */
+.mobile-menu-container {
+  display: none;
+  position: relative;
+}
+
+.toggle {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(1, 103, 255);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1001;
+  transition: all 0.3s ease;
+}
+
+.toggle span {
+  position: absolute;
+  height: 2px;
+  width: 25px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.toggle span:nth-child(1) {
+  transform: translateY(-10px);
+  width: 20px;
+  left: 15px;
+}
+
+.toggle.active span:nth-child(1) {
+  width: 25px;
+  transform: translateY(0px) rotate(45deg);
+  transition-delay: 0.125s;
+}
+
+.toggle span:nth-child(2) {
+  transform: translateY(10px);
+  width: 15px;
+  left: 15px;
+}
+
+.toggle.active span:nth-child(2) {
+  width: 25px;
+  transform: translateY(0px) rotate(315deg);
+  transition-delay: 0.125s;
+}
+
+.toggle.active span:nth-child(3) {
+  transform: translateX(60px);
+}
+
+/* Мобильное навигационное меню - появляется из toggle */
+.mobile-nav {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 200px;
+  background-color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px) scale(0.8);
+  transform-origin: top right;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.mobile-nav.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(10px) scale(1);
+}
+
+.mobile-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  text-align: left;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.mobile-nav li {
+  list-style: none;
+  margin: 0;
+}
+
+.mobile-nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+  padding: 12px 20px;
+  display: block;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-nav a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(1, 103, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.mobile-nav a:hover::before {
+  left: 100%;
+}
+
+.mobile-nav a:hover {
+  background-color: rgba(1, 103, 255, 0.05);
+  color: #1A60C0;
+  border-left-color: #1A60C0;
+  padding-left: 25px;
+}
+
+.mobile-nav a.active {
+  background-color: rgba(1, 103, 255, 0.1);
+  color: #1A60C0;
+  font-weight: bold;
+  border-left-color: #1A60C0;
+}
+
+/* Анимация появления пунктов меню */
+.mobile-nav.open li {
+  animation: menuItemAppear 0.6s ease forwards;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.mobile-nav.open li:nth-child(1) { animation-delay: 0.1s; }
+.mobile-nav.open li:nth-child(2) { animation-delay: 0.2s; }
+.mobile-nav.open li:nth-child(3) { animation-delay: 0.3s; }
+.mobile-nav.open li:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes menuItemAppear {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Overlay для фона при открытом меню */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.mobile-nav-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Адаптивность */
+@media (max-width: 1022px) {
+  h3 {
+    font-size: 30px;
+  }
+  p, a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  * {
+    word-break: break-all;
+  }
+  header {
+    opacity: 75%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .logo {
+    display: none;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-menu-container {
+    display: block;
+    order: 2;
+  }
+  .hero-fourth-screen-text {
+    padding-top: 7%;
+  }
+
+  h1 {
+    order: 1;
+    font-size: 28px;
+  }
+
+
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .links-section {
+    align-items: center;
+  }
+
+  .scrolling-item {
+    flex: 0 0 300px;
+    height: 200px;
+  }
+
+  h3 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .scrolling-track {
+    gap: 40px;
+  }
+
+  .scrolling-item {
+    flex: 0 0 250px;
+    height: 150px;
+  }
+
+  .toggle {
+    width: 45px;
+    height: 45px;
+  }
+
+  .mobile-nav {
+    width: 180px;
+    right: -10px;
+  }
+  .about-text {
+    max-width: 80%;
+  }
+  .download-content h3 {
+    max-width: 85%;
+  }
+  .hero-fourth-screen-text {
+    padding-top: 10%;
+  }
+}
+
+@media (max-width: 360px) {
+  .mobile-nav {
+    width: 160px;
+  }
+  
+  .mobile-nav a {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
 }
